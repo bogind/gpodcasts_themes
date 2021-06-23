@@ -173,4 +173,4 @@ function getTextNodesIterator(el) { // Returns an iterable TreeWalker
 function revertToBase(){
 
 }
-setTheme(base_themes["Neon 1"])
+setTheme(base_themes.ubuntu_purple)

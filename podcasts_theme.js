@@ -59,11 +59,14 @@ let base_themes = {
 }
 let links;
 let icons;
+/*
+need to get and set LS items so that the theme will be applied on navigation
+*/
 function buildPreview(theme){
 
 }
 function setTheme(theme){
-    var element = document.createElement('style'),
+    /*var element = document.createElement('style'),
     sheet;
     document.head.appendChild(element);
     sheet = element.sheet;
@@ -82,10 +85,20 @@ function setTheme(theme){
     var links = 'a {';
         links += `color:${theme.links};`;
         links += '}';
-    sheet.insertRule(links, 3);
+    sheet.insertRule(links, 3);*/
+
+    // set background and text color for everything
     document.body.style.backgroundColor = theme.background
     document.body.style.color = theme.text
+    // get header
     document.getElementsByTagName("header")[0].style.backgroundColor = theme.background2
+    
+    // get footer
+    document.getElementsByClassName("dq2Yed")[0].style.backgroundColor = theme.background2
+    // get footer without google classes
+    // footerIamge = document.getElementsByTagName("img")[document.getElementsByTagName("img").length-2]
+    // footer = footerIamge.parentElement.parentElement.parentElement.parentElement
+
     for (const textNode of getTextNodesIterator(document.body)) {
         textNode.parentElement.style.color = theme.text
     }
@@ -100,10 +113,10 @@ function setTheme(theme){
         });
         childrenCount = x.childElementCount
         if(childrenCount > 0){
-            for(var i=0;i<childrenCount.length;i++){
-                childStyle = document.defaultView.getComputedStyle(x[i])
+            for(var i=0;i<childrenCount;i++){
+                childStyle = document.defaultView.getComputedStyle(x.children[i])
                 if(childStyle.fontFamily.indexOf("\"Material Icons Extended\"") > -1){
-                    x[i].style.color = theme.icons
+                    x.children[i].style.color = theme.icons
                 }
             }
         }
@@ -121,7 +134,7 @@ function setTheme(theme){
         childrenCount = x.childElementCount
         if(childrenCount > 0){
             for(var i=0;i<childrenCount.length;i++){
-                x[i].style.color = theme.icons
+                x.children[i].style.color = theme.icons
             }
         }
         */
@@ -139,3 +152,7 @@ function getTextNodesIterator(el) { // Returns an iterable TreeWalker
     });
     return walker;
 }
+function revertToBase(){
+
+}
+setTheme(base_themes["Neon 1"])

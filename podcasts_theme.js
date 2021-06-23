@@ -1,4 +1,11 @@
 let base_themes = {
+    "Original":{
+        "background":"#ffffff",
+        "background2":"#f8f9fa",
+        "text":"#3c4043",
+        "links":"rgb(60, 64, 67)",
+        "icons":"#1a73e8"
+    },
     "Blue dark":{
         "background":"#272b35",
         "background2":"#181d20",

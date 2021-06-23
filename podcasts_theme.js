@@ -50,6 +50,85 @@ let base_themes = {
     }
 
 }
+let links;
+let icons;
 function buildPreview(theme){
 
+}
+function setTheme(theme){
+    var element = document.createElement('style'),
+    sheet;
+    document.head.appendChild(element);
+    sheet = element.sheet;
+    var background = 'body {';
+        background += `background-color:${theme.background};`;
+        background += '}';
+    sheet.insertRule(background, 0);
+    var background2 = 'header {';
+        background2 += `background-color:${theme.background2};`;
+        background2 += '}';
+    sheet.insertRule(background2, 1);
+    var text = '* {';
+        text += `color:${theme.text};`;
+        text += '}';
+    sheet.insertRule(text,2)
+    var links = 'a {';
+        links += `color:${theme.links};`;
+        links += '}';
+    sheet.insertRule(links, 3);
+    document.body.style.backgroundColor = theme.background
+    document.body.style.color = theme.text
+    document.getElementsByTagName("header")[0].style.backgroundColor = theme.background2
+    for (const textNode of getTextNodesIterator(document.body)) {
+        textNode.parentElement.style.color = theme.text
+    }
+    links = [].slice.call(document.getElementsByTagName("a"));
+    links.forEach(function(x){
+        x.style.color = theme.links
+        x.addEventListener("mouseover", function() {
+            x.style.color = theme.icons;
+        });
+        x.addEventListener("mouseout", function() {
+            x.style.color = theme.links;
+        });
+        childrenCount = x.childElementCount
+        if(childrenCount > 0){
+            for(var i=0;i<childrenCount.length;i++){
+                childStyle = document.defaultView.getComputedStyle(x[i])
+                if(childStyle.fontFamily.indexOf("\"Material Icons Extended\"") > -1){
+                    x[i].style.color = theme.icons
+                }
+            }
+        }
+    })
+    icons = [].slice.call(document.getElementsByTagName("svg"))
+    icons.forEach(function(x){
+        x.style.color = theme.icons
+        x.addEventListener("mouseover", function() {
+            x.style.color = theme.links;
+        });
+        x.addEventListener("mouseout", function() {
+            x.style.color = theme.icons;
+        });
+        /*
+        childrenCount = x.childElementCount
+        if(childrenCount > 0){
+            for(var i=0;i<childrenCount.length;i++){
+                x[i].style.color = theme.icons
+            }
+        }
+        */
+    })
+    
+    
+}
+function getTextNodesIterator(el) { // Returns an iterable TreeWalker
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    walker[Symbol.iterator] = () => ({
+        next() {
+            const value = walker.nextNode();
+            return {value, done: !value};
+        }
+    });
+    return walker;
 }

@@ -1,54 +1,62 @@
 let base_themes = {
-    "Original":{
+    "gpod":{
+        "name":"Original",
         "background":"#ffffff",
         "background2":"#f8f9fa",
         "text":"#3c4043",
         "links":"rgb(60, 64, 67)",
         "icons":"#1a73e8"
     },
-    "Blue dark":{
+    "blue_dark":{
+        "name":"Blue dark",
         "background":"#272b35",
         "background2":"#181d20",
         "text":"#e3eef9",
         "links":"#606376",
         "icons":"#5675b9"
     },
-    "Purple Dark":{
+    "purple_dark":{
+        "name":"Purple Dark",
         "background":"#111111",
         "background2":"#181818",
         "text":"#eff0f1",
         "links":"#cccccc",
         "icons":"#ab47bc"
     },
-    "Orange Dark":{
+    "orange_dark":{
+        "name":"Orange Dark",
         "background":"#0a0400",
         "background2":"#0e0702",
         "text":"#fff9f5",
         "links":"#ffede1",
         "icons":"#ff6905"
     },
-    "Ubuntu Purple":{
+    "ubuntu_purple":{
+        "name":"Ubuntu Purple",
         "background":"#2c071a",
         "background2":"#430b28",
         "text":"#f2f1ef",
         "links":"#e6e5e3",
         "icons":"#ef7847"
     },
-    "Ubuntu Gray":{
+    "ubuntu_gray":{
+        "name":"Ubuntu Gray",
         "background":"#312d2a",
         "background2":"#3d3c38",
         "text":"#f2f1ef",
         "links":"#e6e5e3",
         "icons":"#ef7847"
     },
-    "Neon 1":{
+    "neon1":{
+        "name":"Neon 1",
         "background":"#00170e",
         "background2":"#1fb598",
         "text":"#bdfff4",
         "links":"#1fb598",
         "icons":"#00b030"
     },
-    "Neon 2":{
+    "neon2":{
+        "name":"Neon 2",
         "background":"#10133a",
         "background2":"#1b96f4",
         "text":"#ef0195",

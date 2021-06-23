@@ -157,6 +157,12 @@ function setTheme(theme){
         }
         */
     })
+
+    // hiding line for the small circle buffer
+    circlingLines = [].slice.call(document.getElementsByClassName("ifJp6e"))
+    circlingLines.forEach(function(x){
+        x.style.stroke = "rgba(0,0,0,0)"
+    })
     
     
 }

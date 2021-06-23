@@ -1,0 +1,20 @@
+{
+
+    "manifest_version": 2,
+    "name": "Google Podcasts Themes",
+    "version": "1.0",
+  
+    "description": "Fixes Heb To Eng typing Flips due to typing in different keyboard layouts",
+
+    "icons": {
+        "48": "icons/border-48.png"
+      },
+  
+    "content_scripts": [
+      {
+        "matches": ["*://podcasts.google.com/*"],
+        "js": ["podcasts_theme.js"]
+      }
+    ]
+  
+  }

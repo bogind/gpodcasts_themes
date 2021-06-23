@@ -180,3 +180,11 @@ function revertToBase(){
 
 }
 setTheme(base_themes.ubuntu_purple)
+/*
+// classes for svg circles
+fullcircle = "iIDD2e"
+circlePartComplete = "lpZc1c"
+circlePartMissing = "zbdB4c"
+completeCircleRight = "ZRugV"
+completeCircleLeft = "hdW0bf"
+*/

@@ -99,6 +99,16 @@ function setTheme(theme){
     // footerIamge = document.getElementsByTagName("img")[document.getElementsByTagName("img").length-2]
     // footer = footerIamge.parentElement.parentElement.parentElement.parentElement
 
+    // get buttons marked subscribed
+    buttons = [].slice.call(document.getElementsByClassName("xnE3f"));
+    buttons.forEach(function(x){
+        if(document.defaultView.getComputedStyle(x).visibility == "visible"){
+            x.style.backgroundColor = theme.background2
+            x.style.borderColor = theme.background2
+        }
+    })
+    
+
     for (const textNode of getTextNodesIterator(document.body)) {
         textNode.parentElement.style.color = theme.text
     }

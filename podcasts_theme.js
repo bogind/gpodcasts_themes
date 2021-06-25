@@ -1,6 +1,7 @@
 let base_themes = {
     "blue_dark":{
         "name":"Blue dark",
+        "id":"blue_dark",
         "background":"#272b35",
         "background2":"#181d20",
         "text":"#e3eef9",
@@ -9,6 +10,7 @@ let base_themes = {
     },
     "purple_dark":{
         "name":"Purple Dark",
+        "id":"purple_dark",
         "background":"#111111",
         "background2":"#181818",
         "text":"#eff0f1",
@@ -17,6 +19,7 @@ let base_themes = {
     },
     "orange_dark":{
         "name":"Orange Dark",
+        "id":"orange_dark",
         "background":"#0a0400",
         "background2":"#0e0702",
         "text":"#fff9f5",
@@ -25,6 +28,7 @@ let base_themes = {
     },
     "ubuntu_purple":{
         "name":"Ubuntu Purple",
+        "id":"ubuntu_purple",
         "background":"#2c071a",
         "background2":"#430b28",
         "text":"#f2f1ef",
@@ -33,6 +37,7 @@ let base_themes = {
     },
     "ubuntu_gray":{
         "name":"Ubuntu Gray",
+        "id":"ubuntu_gray",
         "background":"#312d2a",
         "background2":"#3d3c38",
         "text":"#f2f1ef",
@@ -41,6 +46,7 @@ let base_themes = {
     },
     "neon1":{
         "name":"Neon 1",
+        "id":"neon1",
         "background":"#00170e",
         "background2":"#1fb598",
         "text":"#bdfff4",
@@ -49,6 +55,7 @@ let base_themes = {
     },
     "neon2":{
         "name":"Neon 2",
+        "id":"neon2",
         "background":"#10133a",
         "background2":"#1b96f4",
         "text":"#ef0195",
@@ -71,6 +78,7 @@ let element;
 let sheet;
 let rule;
 let gThemeContainer;
+let currentTheme = localStorage.getItem("currentTheme") ? localStorage.getItem("currentTheme") : "original" ;
 /*
 need to get and set LS items so that the theme will be applied on navigation
 */
@@ -112,6 +120,11 @@ function addDiv(){
 
         div.addEventListener("click", function() {
             setTheme(base_themes[this.value])
+            themeDivs = [].slice.call(document.getElementsByClassName("themeDiv"))
+            themeDivs.forEach(function(x){
+                x.style.boxShadow = "0 0 0 0pt white"
+            })
+            this.style.boxShadow = "0 0 0 2pt white"
         });
         iconDiv.addEventListener("click", function() {
             setTheme(base_themes[this.value])
@@ -129,6 +142,8 @@ function buildButtons(theme){
 
 }
 function setTheme(theme){
+    currentTheme = theme.name
+    localStorage.setItem("currentTheme",theme.id)
     container = document.getElementById("gThemeContainer");
     container.style.backgroundColor = theme.background
     container.style.borderColor = theme.background2
@@ -141,22 +156,6 @@ function setTheme(theme){
         sheet = element.sheet;
     }
     
-    /*var background = 'body {';
-        background += `background-color:${theme.background};`;
-        background += '}';
-    sheet.insertRule(background, 0);
-    var background2 = 'header {';
-        background2 += `background-color:${theme.background2};`;
-        background2 += '}';
-    sheet.insertRule(background2, 1);
-    var text = '* {';
-        text += `color:${theme.text};`;
-        text += '}';
-    sheet.insertRule(text,2)
-    var links = 'a {';
-        links += `color:${theme.links};`;
-        links += '}';
-    sheet.insertRule(links, 3);*/
 
     // set background and text color for everything
     document.body.style.backgroundColor = theme.background
@@ -470,76 +469,22 @@ function getTextNodesIterator(el) { // Returns an iterable TreeWalker
 function revertToBase(){
 
 }
-style = document.createElement("style")
-style.innerHTML = `
-#gThemeContainer {
-    position: fixed;
-    width: 30px;
-    right: 5px;
-    top: 70px;
-    z-index: 1000;
-}
-.themeDiv {
-    width: 30px;
-    height: 30px;
-    position: fixed;
-    right: 5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: rgba(0,0,0,0);
-    border-radius: 50%;
-    font-size: 8px;
-    text-align: center;
-    display: inline-table;
-    vertical-align: middle;
-    background-color: rgb(44, 7, 26);
-    margin-bottom: 15px;
-    cursor: pointer;
-    z-index: 1010;
-}
-.themeIconDiv {
-    width: 7px;
-    height: 7px;
-    position: fixed;
-    right: 21px;
-    text-align: center;
-    display: inline-table;
-    vertical-align: middle;
-    background-color: rgb(44, 7, 26);
-    border-radius: 50%;
-    margin-bottom: 15px;
-    cursor: pointer;
-    z-index: 1020;
-}
-.themeTextDiv {
-    width: 7px;
-    height: 7px;
-    position: fixed;
-    right: 30px;
-    text-align: center;
-    display: inline-table;
-    vertical-align: middle;
-    background-color: rgb(44, 7, 26);
-    border-radius: 50%;
-    margin-bottom: 15px;
-    cursor: pointer;
-    z-index: 1020;
-}
-.themeLinkDiv {
-    width: 7px;
-    height: 7px;
-    position: fixed;
-    right: 12px;
-    text-align: center;
-    display: inline-table;
-    vertical-align: middle;
-    background-color: rgb(44, 7, 26);
-    border-radius: 50%;
-    margin-bottom: 15px;
-    cursor: pointer;
-    z-index: 1020;
-}
-`
-document.head.append(style)
 addDiv()
-setTheme(base_themes.ubuntu_purple)
+if(localStorage.getItem("currentTheme")){
+    currentTheme = localStorage.getItem("currentTheme")
+    div = document.getElementById(currentTheme)
+    div.style.boxShadow = "0 0 0 2pt white"
+    setTheme(base_themes[currentTheme])
+}else{
+    revertToBase()
+}
+window.ontransitionend = function(){
+    if(localStorage.getItem("currentTheme")){
+        currentTheme = localStorage.getItem("currentTheme")
+        div = document.getElementById(currentTheme)
+        div.style.boxShadow = "0 0 0 2pt white"
+        setTheme(base_themes[currentTheme])
+    }else{
+        revertToBase()
+    }
+}

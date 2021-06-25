@@ -1,0 +1,67 @@
+#gThemeContainer {
+    position: fixed;
+    width: 30px;
+    right: 5px;
+    top: 70px;
+    z-index: 1000;
+}
+.themeDiv {
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    right: 5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0,0,0,0);
+    border-radius: 50%;
+    font-size: 8px;
+    text-align: center;
+    display: inline-table;
+    vertical-align: middle;
+    background-color: rgb(44, 7, 26);
+    margin-bottom: 15px;
+    cursor: pointer;
+    z-index: 1010;
+}
+.themeIconDiv {
+    width: 7px;
+    height: 7px;
+    position: fixed;
+    right: 21px;
+    text-align: center;
+    display: inline-table;
+    vertical-align: middle;
+    background-color: rgb(44, 7, 26);
+    border-radius: 50%;
+    margin-bottom: 15px;
+    cursor: pointer;
+    z-index: 1020;
+}
+.themeTextDiv {
+    width: 7px;
+    height: 7px;
+    position: fixed;
+    right: 30px;
+    text-align: center;
+    display: inline-table;
+    vertical-align: middle;
+    background-color: rgb(44, 7, 26);
+    border-radius: 50%;
+    margin-bottom: 15px;
+    cursor: pointer;
+    z-index: 1020;
+}
+.themeLinkDiv {
+    width: 7px;
+    height: 7px;
+    position: fixed;
+    right: 12px;
+    text-align: center;
+    display: inline-table;
+    vertical-align: middle;
+    background-color: rgb(44, 7, 26);
+    border-radius: 50%;
+    margin-bottom: 15px;
+    cursor: pointer;
+    z-index: 1020;
+}

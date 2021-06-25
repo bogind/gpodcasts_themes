@@ -13,7 +13,8 @@
     "content_scripts": [
       {
         "matches": ["*://podcasts.google.com/*"],
-        "js": ["podcasts_theme.js"]
+        "js": ["podcasts_theme.js"],
+        "css":["podcasts_theme.css"]
       }
     ]
   

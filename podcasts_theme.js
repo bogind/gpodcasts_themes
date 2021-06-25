@@ -1,12 +1,4 @@
 let base_themes = {
-    "gpod":{
-        "name":"Original",
-        "background":"#ffffff",
-        "background2":"#f8f9fa",
-        "text":"#3c4043",
-        "links":"rgb(60, 64, 67)",
-        "icons":"#1a73e8"
-    },
     "blue_dark":{
         "name":"Blue dark",
         "background":"#272b35",
@@ -65,18 +57,82 @@ let base_themes = {
     }
 
 }
+let originalTheme = {
+    "name":"Original",
+    "background":"#ffffff",
+    "background2":"#f8f9fa",
+    "text":"#3c4043",
+    "links":"rgb(60, 64, 67)",
+    "icons":"#1a73e8"
+}
 let links;
 let icons;
 let element;
 let sheet;
 let rule;
+let gThemeContainer;
 /*
 need to get and set LS items so that the theme will be applied on navigation
 */
-function buildPreview(theme){
+function addDiv(){
+    gThemeContainer = document.createElement('div');
+    gThemeContainer.id = "gThemeContainer";
+    for(var i=0;i<Object.keys(base_themes).length;i++){
+
+        theme = base_themes[Object.keys(base_themes)[i]];
+        div = document.createElement('div');
+        div.classList.add("themeDiv");
+        div.style.backgroundColor = theme.background;
+        div.style.borderColor = theme.background2;
+        div.style.top = `${70 +(45*(i))}px`;
+        div.id = Object.keys(base_themes)[i];
+        div.value = Object.keys(base_themes)[i];
+        div.title = base_themes[Object.keys(base_themes)[i]].name;
+
+        iconDiv = document.createElement('div');
+        iconDiv.classList.add("themeIconDiv");
+        iconDiv.style.backgroundColor = theme.icons;
+        iconDiv.style.top = `${86.5 +(45*(i))}px`;
+        iconDiv.title = base_themes[Object.keys(base_themes)[i]].name;
+        iconDiv.value = Object.keys(base_themes)[i];
+
+        textDiv = document.createElement('div');
+        textDiv.classList.add("themeTextDiv");
+        textDiv.style.backgroundColor = theme.text;
+        textDiv.style.top = `${86.5 +(45*(i))}px`;
+        textDiv.title = base_themes[Object.keys(base_themes)[i]].name;
+        textDiv.value = Object.keys(base_themes)[i];
+
+        linkDiv = document.createElement('div');
+        linkDiv.classList.add("themeLinkDiv");
+        linkDiv.style.backgroundColor = theme.links;
+        linkDiv.style.top = `${86.5 +(45*(i))}px`;
+        linkDiv.title = base_themes[Object.keys(base_themes)[i]].name;
+        linkDiv.value = Object.keys(base_themes)[i];
+
+        div.addEventListener("click", function() {
+            setTheme(base_themes[this.value])
+        });
+        iconDiv.addEventListener("click", function() {
+            setTheme(base_themes[this.value])
+        });
+        div.append(iconDiv,textDiv,linkDiv)
+        gThemeContainer.append(div)
+    }
+    
+
+    //gThemeContainer.innerHTML = `<p><a href="#">Links</a><br>Text<br><b>Icons</b></p>`
+
+    document.body.appendChild(gThemeContainer)
+}
+function buildButtons(theme){
 
 }
 function setTheme(theme){
+    container = document.getElementById("gThemeContainer");
+    container.style.backgroundColor = theme.background
+    container.style.borderColor = theme.background2
+
     elem = document.getElementById("ThemeSheet");
     if(!elem){
         element = document.createElement('style');
@@ -414,4 +470,76 @@ function getTextNodesIterator(el) { // Returns an iterable TreeWalker
 function revertToBase(){
 
 }
+style = document.createElement("style")
+style.innerHTML = `
+#gThemeContainer {
+    position: fixed;
+    width: 30px;
+    right: 5px;
+    top: 70px;
+    z-index: 1000;
+}
+.themeDiv {
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    right: 5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0,0,0,0);
+    border-radius: 50%;
+    font-size: 8px;
+    text-align: center;
+    display: inline-table;
+    vertical-align: middle;
+    background-color: rgb(44, 7, 26);
+    margin-bottom: 15px;
+    cursor: pointer;
+    z-index: 1010;
+}
+.themeIconDiv {
+    width: 7px;
+    height: 7px;
+    position: fixed;
+    right: 21px;
+    text-align: center;
+    display: inline-table;
+    vertical-align: middle;
+    background-color: rgb(44, 7, 26);
+    border-radius: 50%;
+    margin-bottom: 15px;
+    cursor: pointer;
+    z-index: 1020;
+}
+.themeTextDiv {
+    width: 7px;
+    height: 7px;
+    position: fixed;
+    right: 30px;
+    text-align: center;
+    display: inline-table;
+    vertical-align: middle;
+    background-color: rgb(44, 7, 26);
+    border-radius: 50%;
+    margin-bottom: 15px;
+    cursor: pointer;
+    z-index: 1020;
+}
+.themeLinkDiv {
+    width: 7px;
+    height: 7px;
+    position: fixed;
+    right: 12px;
+    text-align: center;
+    display: inline-table;
+    vertical-align: middle;
+    background-color: rgb(44, 7, 26);
+    border-radius: 50%;
+    margin-bottom: 15px;
+    cursor: pointer;
+    z-index: 1020;
+}
+`
+document.head.append(style)
+addDiv()
 setTheme(base_themes.ubuntu_purple)

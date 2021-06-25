@@ -67,6 +67,9 @@ let base_themes = {
 }
 let links;
 let icons;
+let element;
+let sheet;
+let rule;
 /*
 need to get and set LS items so that the theme will be applied on navigation
 */
@@ -74,11 +77,15 @@ function buildPreview(theme){
 
 }
 function setTheme(theme){
-    /*var element = document.createElement('style'),
-    sheet;
-    document.head.appendChild(element);
-    sheet = element.sheet;
-    var background = 'body {';
+    elem = document.getElementById("ThemeSheet");
+    if(!elem){
+        element = document.createElement('style');
+        element.id = "ThemeSheet";
+        document.head.appendChild(element);
+        sheet = element.sheet;
+    }
+    
+    /*var background = 'body {';
         background += `background-color:${theme.background};`;
         background += '}';
     sheet.insertRule(background, 0);
@@ -123,21 +130,20 @@ function setTheme(theme){
     links = [].slice.call(document.getElementsByTagName("a"));
     links.forEach(function(x){
         x.style.color = theme.links
+        childrenCount = x.childElementCount
         x.addEventListener("mouseover", function() {
             x.style.color = theme.icons;
+            x.childNodes.forEach(function(y){
+                if(y.style){y.style.color = theme.icons}
+            })
         });
         x.addEventListener("mouseout", function() {
             x.style.color = theme.links;
+            x.childNodes.forEach(function(y){
+                if(y.style){y.style.color = theme.links}
+            })
         });
-        childrenCount = x.childElementCount
-        if(childrenCount > 0){
-            for(var i=0;i<childrenCount;i++){
-                childStyle = document.defaultView.getComputedStyle(x.children[i])
-                if(childStyle.fontFamily.indexOf("\"Material Icons Extended\"") > -1){
-                    x.children[i].style.color = theme.icons
-                }
-            }
-        }
+
     })
     icons = [].slice.call(document.getElementsByTagName("svg"))
     icons.forEach(function(x){
@@ -163,8 +169,237 @@ function setTheme(theme){
     circlingLines.forEach(function(x){
         x.style.stroke = "rgba(0,0,0,0)"
     })
+    rule = '.ifJp6e {';
+    rule += `stroke:rgba(0,0,0,0);`;
+    rule += '}';
+    sheet.insertRule(rule, 0);
+
+
+    // unplayed circles fill and stroke, changed from blue stroke and white fill
+    unplayedcircles = [].slice.call(document.getElementsByClassName("iIDD2e"))
+    unplayedcircles.forEach(function(x){
+        x.style.stroke = theme.icons
+        x.style.fill = "white"
+    })
+    rule = '.iIDD2e {';
+    rule += `stroke:${theme.icons};`;
+    rule += `fill:rgb(255,255,255);`;
+    rule += '}';
+    sheet.insertRule(rule, 1);
+    unplayedcirclesIcons = [].slice.call(document.getElementsByClassName("ugRcF"))
+    unplayedcirclesIcons.forEach(function(x){
+        x.style.fill = theme.icons
+    })
+    rule = '.ugRcF {';
+    rule += `fill:${theme.icons};`;
+    rule += '}';
+    sheet.insertRule(rule, 2);
+
+    // change colors for episodes not finished yet
+    halfUnplayedPartCircles = [].slice.call(document.getElementsByClassName("zbdB4c"))
+    halfUnplayedPartCircles.forEach(function(x){
+        x.style.stroke = theme.icons
+
+    })
+    rule = '.zbdB4c {';
+    rule += `stroke:${theme.icons};`;
+    rule += '}';
+    sheet.insertRule(rule, 3);
+    halfPlayedPartCircles = [].slice.call(document.getElementsByClassName("lpZc1c"))
+    halfPlayedPartCircles.forEach(function(x){
+        x.style.stroke = theme.links
+    })
+    rule = '.lpZc1c {';
+    rule += `stroke:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 4);
+
     
+    // currently playing
+    playingLeftLine = [].slice.call(document.getElementsByClassName("aakBI"))
+    playingLeftLine.forEach(function(x){
+        x.style.stroke = theme.icons
+    })
+    rule = '.aakBI {';
+    rule += `stroke:${theme.icons};`;
+    rule += '}';
+    sheet.insertRule(rule, 5);
+
+    playingCenterLine = [].slice.call(document.getElementsByClassName("Sygbc"))
+    playingCenterLine.forEach(function(x){
+        x.style.stroke = theme.icons
+    })
+    rule = '.Sygbc {';
+    rule += `stroke:${theme.icons};`;
+    rule += '}';
+    sheet.insertRule(rule, 6);
+
+    playingRightLine = [].slice.call(document.getElementsByClassName("aZnmw"))
+    playingRightLine.forEach(function(x){
+        x.style.stroke = theme.icons
+    })
+    rule = '.aZnmw {';
+    rule += `stroke:${theme.icons};`;
+    rule += '}';
+    sheet.insertRule(rule, 7);
+
+    // finished episodes
+    completeCircleRight = [].slice.call(document.getElementsByClassName("ZRugV"))
+    completeCircleRight.forEach(function(x){
+        x.style.stroke = theme.links
+    })
+    rule = '.ZRugV {';
+    rule += `stroke:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 8);
+
+    completeCircleLeft = [].slice.call(document.getElementsByClassName("hdW0bf"))
+    completeCircleLeft.forEach(function(x){
+        x.style.stroke = theme.links
+    })
+    rule = '.hdW0bf {';
+    rule += `stroke:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 9);
+
+    completeCircleIcon = [].slice.call(document.getElementsByClassName("ytTdqd"))
+    completeCircleIcon.forEach(function(x){
+        x.style.fill = theme.links
+    })
+    rule = '.ytTdqd {';
+    rule += `fill:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 10);    
+
+    // bar icons
+    barIcons = [].slice.call(document.getElementsByClassName("DPvwYc"))
+    barIcons.forEach(function(x){
+        x.style.color = theme.links
+    })
+    rule = '.DPvwYc {';
+    rule += `color:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 11);    
+
+    barSpeeedBackground = [].slice.call(document.getElementsByClassName("Ttr5be"))
+    barSpeeedBackground.forEach(function(x){
+        x.style.backgroundColor = theme.background
+        x.style.borderColor = theme.links
+    })
+    rule = '.Ttr5be {';
+    rule += `background-color:${theme.background};`;
+    rule += `border-color:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 12);    
+
+    barSpeeedBackground = [].slice.call(document.getElementsByClassName("Ttr5be"))
+    barSpeeedBackground.forEach(function(x){
+        x.style.backgroundColor = theme.background
+        x.style.borderColor = theme.links
+    })
+    rule = '.Ttr5be {';
+    rule += `background-color:${theme.background};`;
+    rule += `border-color:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 12); 
+
+    speedChooserDiv = [].slice.call(document.getElementsByClassName("JPdR6b"))
+    speedChooserDiv.forEach(function(x){
+        x.style.backgroundColor = theme.background2
+        x.style.borderColor = theme.links
+    })
+    rule = '.JPdR6b {';
+    rule += `background-color:${theme.background2};`;
+    rule += `border-color:${theme.links};`;
+    rule += `color:${theme.text};`
+    rule += '}';
+    sheet.insertRule(rule, 13); 
+
+    speedChooserDone = [].slice.call(document.getElementsByClassName("TkgSBc"))
+    speedChooserDone.forEach(function(x){
+        x.style.color = theme.icons
+    })
+    rule = '.TkgSBc {';
+    rule += `color:${theme.icons};`
+    rule += '}';
+    sheet.insertRule(rule, 14); 
+
+    SelectedSpeedSquare = [].slice.call(document.getElementsByClassName("cL0K1b"))
+    speedChooserDone.forEach(function(x){
+        x.style.color = theme.icons
+        x.style.backgroundColor = theme.background
+    })
+    rule = '.cL0K1b {';
+    rule += `color:${theme.icons};`
+    rule += `background-color:${theme.background}`
+    rule += '}';
+    sheet.insertRule(rule, 15); 
     
+    SpeedSquares = [].slice.call(document.getElementsByClassName("caxZTb"))
+    SpeedSquares.forEach(function(x){
+        x.style.color = theme.text
+        x.style.backgroundColor = theme.background2
+        x.style.borderColor = theme.links
+    })
+    rule = '.caxZTb {';
+    rule += `color:${theme.text};`
+    rule += `background-color:${theme.background2}`
+    rule += `border-color:${theme.links};`
+    rule += '}';
+    sheet.insertRule(rule, 16);
+
+    volumeBarBackground = [].slice.call(document.getElementsByClassName("ptC3Le"))
+    volumeBarBackground.forEach(function(x){
+        x.style.backgroundColor = theme.links
+    })
+    rule = '.ptC3Le {';
+    rule += `background-color:${theme.links}`
+    rule += '}';
+    sheet.insertRule(rule, 17);
+
+    volumeBarForeground = [].slice.call(document.getElementsByClassName("FTnqqe"))
+    volumeBarForeground.forEach(function(x){
+        x.style.backgroundColor = theme.icons
+    })
+    rule = '.FTnqqe {';
+    rule += `background-color:${theme.icons}`
+    rule += '}';
+    sheet.insertRule(rule, 18);
+
+    volumeBarCircle = [].slice.call(document.getElementsByClassName("kUwJrc"))
+    volumeBarCircle.forEach(function(x){
+        x.style.backgroundColor = theme.icons
+    })
+    rule = '.kUwJrc {';
+    rule += `background-color:${theme.icons}`
+    rule += '}';
+    sheet.insertRule(rule, 19);
+
+    subscribedCircle = [].slice.call(document.getElementsByClassName("RmrYyf"))
+    subscribedCircle.forEach(function(x){
+        x.style.backgroundColor = theme.icons
+        x.style.color = theme.links
+    })
+    rule = '.RmrYyf {';
+    rule += `background-color:${theme.icons}`
+    rule += `color:${theme.links}`
+    rule += '}';
+    sheet.insertRule(rule, 20);
+
+    websiteIcon = [].slice.call(document.getElementsByClassName("L7wSy"))
+    websiteIcon.forEach(function(x){
+        x.style.color = theme.icons
+    })
+    rule = '.DPvwYc {';
+    rule += `color:${theme.icons}`
+    rule += '}';
+    sheet.insertRule(rule, 21);
+
+    // icons hover rule
+    rule = '.fIqyif:hover {';
+    rule += `color:${theme.icons}`;
+    rule += '}';
+    //sheet.insertRule(rule, 22);
 }
 function getTextNodesIterator(el) { // Returns an iterable TreeWalker
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
@@ -180,11 +415,3 @@ function revertToBase(){
 
 }
 setTheme(base_themes.ubuntu_purple)
-/*
-// classes for svg circles
-fullcircle = "iIDD2e"
-circlePartComplete = "lpZc1c"
-circlePartMissing = "zbdB4c"
-completeCircleRight = "ZRugV"
-completeCircleLeft = "hdW0bf"
-*/

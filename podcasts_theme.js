@@ -66,6 +66,7 @@ let base_themes = {
 }
 let originalTheme = {
     "name":"Original",
+    "id":"Original",
     "background":"#ffffff",
     "background2":"#f8f9fa",
     "text":"#3c4043",
@@ -450,23 +451,316 @@ function setTheme(theme){
     rule += '}';
     sheet.insertRule(rule, 21);
 
-    // icons hover rule
-    rule = '.fIqyif:hover {';
-    rule += `color:${theme.icons}`;
-    rule += '}';
-    //sheet.insertRule(rule, 22);
-}
-function getTextNodesIterator(el) { // Returns an iterable TreeWalker
-    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-    walker[Symbol.iterator] = () => ({
-        next() {
-            const value = walker.nextNode();
-            return {value, done: !value};
-        }
-    });
-    return walker;
 }
 function revertToBase(){
+    theme = originalTheme
+    currentTheme = "Original"
+    localStorage.setItem("currentTheme",theme.id)
+    container = document.getElementById("gThemeContainer");
+    container.style.backgroundColor = theme.background
+    container.style.borderColor = theme.background2
+
+    elem = document.getElementById("ThemeSheet");
+    if(!elem){
+        element = document.createElement('style');
+        element.id = "ThemeSheet";
+        document.head.appendChild(element);
+        sheet = element.sheet;
+    }
+    
+
+    // set background and text color for everything
+    document.body.style.backgroundColor = theme.background
+    document.body.style.color = theme.text
+    // get header
+    document.getElementsByTagName("header")[0].style.backgroundColor = theme.background2
+    
+    // get footer
+    document.getElementsByClassName("dq2Yed")[0].style.backgroundColor = theme.background2
+    // get footer without google classes
+    // footerIamge = document.getElementsByTagName("img")[document.getElementsByTagName("img").length-2]
+    // footer = footerIamge.parentElement.parentElement.parentElement.parentElement
+
+    // get buttons marked subscribed
+    buttons = [].slice.call(document.getElementsByClassName("xnE3f"));
+    buttons.forEach(function(x){
+        if(document.defaultView.getComputedStyle(x).visibility == "visible"){
+            x.style.backgroundColor = theme.background2
+            x.style.borderColor = theme.background2
+        }
+    })
+    
+
+    for (const textNode of getTextNodesIterator(document.body)) {
+        textNode.parentElement.style.color = theme.text
+    }
+    links = [].slice.call(document.getElementsByTagName("a"));
+    links.forEach(function(x){
+        x.style.color = theme.links
+        childrenCount = x.childElementCount
+        x.addEventListener("mouseover", function() {
+            x.style.color = theme.icons;
+            x.childNodes.forEach(function(y){
+                if(y.style){y.style.color = theme.icons}
+            })
+        });
+        x.addEventListener("mouseout", function() {
+            x.style.color = theme.links;
+            x.childNodes.forEach(function(y){
+                if(y.style){y.style.color = theme.links}
+            })
+        });
+
+    })
+    icons = [].slice.call(document.getElementsByTagName("svg"))
+    icons.forEach(function(x){
+        x.style.color = theme.icons
+        x.addEventListener("mouseover", function() {
+            x.style.color = theme.links;
+        });
+        x.addEventListener("mouseout", function() {
+            x.style.color = theme.icons;
+        });
+        /*
+        childrenCount = x.childElementCount
+        if(childrenCount > 0){
+            for(var i=0;i<childrenCount.length;i++){
+                x.children[i].style.color = theme.icons
+            }
+        }
+        */
+    })
+
+    // hiding line for the small circle buffer
+    circlingLines = [].slice.call(document.getElementsByClassName("ifJp6e"))
+    circlingLines.forEach(function(x){
+        x.style.stroke = "rgba(0,0,0,0)"
+    })
+    rule = '.ifJp6e {';
+    rule += `stroke:rgba(0,0,0,0);`;
+    rule += '}';
+    sheet.insertRule(rule, 0);
+
+
+    // unplayed circles fill and stroke, changed from blue stroke and white fill
+    unplayedcircles = [].slice.call(document.getElementsByClassName("iIDD2e"))
+    unplayedcircles.forEach(function(x){
+        x.style.stroke = theme.icons
+        x.style.fill = "white"
+    })
+    rule = '.iIDD2e {';
+    rule += `stroke:${theme.icons};`;
+    rule += `fill:rgb(255,255,255);`;
+    rule += '}';
+    sheet.insertRule(rule, 1);
+    unplayedcirclesIcons = [].slice.call(document.getElementsByClassName("ugRcF"))
+    unplayedcirclesIcons.forEach(function(x){
+        x.style.fill = theme.icons
+    })
+    rule = '.ugRcF {';
+    rule += `fill:${theme.icons};`;
+    rule += '}';
+    sheet.insertRule(rule, 2);
+
+    // change colors for episodes not finished yet
+    halfUnplayedPartCircles = [].slice.call(document.getElementsByClassName("zbdB4c"))
+    halfUnplayedPartCircles.forEach(function(x){
+        x.style.stroke = theme.icons
+
+    })
+    rule = '.zbdB4c {';
+    rule += `stroke:${theme.icons};`;
+    rule += '}';
+    sheet.insertRule(rule, 3);
+    halfPlayedPartCircles = [].slice.call(document.getElementsByClassName("lpZc1c"))
+    halfPlayedPartCircles.forEach(function(x){
+        x.style.stroke = theme.links
+    })
+    rule = '.lpZc1c {';
+    rule += `stroke:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 4);
+
+    
+    // currently playing
+    playingLeftLine = [].slice.call(document.getElementsByClassName("aakBI"))
+    playingLeftLine.forEach(function(x){
+        x.style.stroke = theme.icons
+    })
+    rule = '.aakBI {';
+    rule += `stroke:${theme.icons};`;
+    rule += '}';
+    sheet.insertRule(rule, 5);
+
+    playingCenterLine = [].slice.call(document.getElementsByClassName("Sygbc"))
+    playingCenterLine.forEach(function(x){
+        x.style.stroke = theme.icons
+    })
+    rule = '.Sygbc {';
+    rule += `stroke:${theme.icons};`;
+    rule += '}';
+    sheet.insertRule(rule, 6);
+
+    playingRightLine = [].slice.call(document.getElementsByClassName("aZnmw"))
+    playingRightLine.forEach(function(x){
+        x.style.stroke = theme.icons
+    })
+    rule = '.aZnmw {';
+    rule += `stroke:${theme.icons};`;
+    rule += '}';
+    sheet.insertRule(rule, 7);
+
+    // finished episodes
+    completeCircleRight = [].slice.call(document.getElementsByClassName("ZRugV"))
+    completeCircleRight.forEach(function(x){
+        x.style.stroke = theme.links
+    })
+    rule = '.ZRugV {';
+    rule += `stroke:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 8);
+
+    completeCircleLeft = [].slice.call(document.getElementsByClassName("hdW0bf"))
+    completeCircleLeft.forEach(function(x){
+        x.style.stroke = theme.links
+    })
+    rule = '.hdW0bf {';
+    rule += `stroke:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 9);
+
+    completeCircleIcon = [].slice.call(document.getElementsByClassName("ytTdqd"))
+    completeCircleIcon.forEach(function(x){
+        x.style.fill = theme.links
+    })
+    rule = '.ytTdqd {';
+    rule += `fill:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 10);    
+
+    // bar icons
+    barIcons = [].slice.call(document.getElementsByClassName("DPvwYc"))
+    barIcons.forEach(function(x){
+        x.style.color = theme.links
+    })
+    rule = '.DPvwYc {';
+    rule += `color:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 11);    
+
+    barSpeeedBackground = [].slice.call(document.getElementsByClassName("Ttr5be"))
+    barSpeeedBackground.forEach(function(x){
+        x.style.backgroundColor = theme.background
+        x.style.borderColor = theme.links
+    })
+    rule = '.Ttr5be {';
+    rule += `background-color:${theme.background};`;
+    rule += `border-color:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 12);    
+
+    barSpeeedBackground = [].slice.call(document.getElementsByClassName("Ttr5be"))
+    barSpeeedBackground.forEach(function(x){
+        x.style.backgroundColor = theme.background
+        x.style.borderColor = theme.links
+    })
+    rule = '.Ttr5be {';
+    rule += `background-color:${theme.background};`;
+    rule += `border-color:${theme.links};`;
+    rule += '}';
+    sheet.insertRule(rule, 12); 
+
+    speedChooserDiv = [].slice.call(document.getElementsByClassName("JPdR6b"))
+    speedChooserDiv.forEach(function(x){
+        x.style.backgroundColor = theme.background2
+        x.style.borderColor = theme.links
+    })
+    rule = '.JPdR6b {';
+    rule += `background-color:${theme.background2};`;
+    rule += `border-color:${theme.links};`;
+    rule += `color:${theme.text};`
+    rule += '}';
+    sheet.insertRule(rule, 13); 
+
+    speedChooserDone = [].slice.call(document.getElementsByClassName("TkgSBc"))
+    speedChooserDone.forEach(function(x){
+        x.style.color = theme.icons
+    })
+    rule = '.TkgSBc {';
+    rule += `color:${theme.icons};`
+    rule += '}';
+    sheet.insertRule(rule, 14); 
+
+    SelectedSpeedSquare = [].slice.call(document.getElementsByClassName("cL0K1b"))
+    speedChooserDone.forEach(function(x){
+        x.style.color = theme.icons
+        x.style.backgroundColor = theme.background
+    })
+    rule = '.cL0K1b {';
+    rule += `color:${theme.icons};`
+    rule += `background-color:${theme.background}`
+    rule += '}';
+    sheet.insertRule(rule, 15); 
+    
+    SpeedSquares = [].slice.call(document.getElementsByClassName("caxZTb"))
+    SpeedSquares.forEach(function(x){
+        x.style.color = theme.text
+        x.style.backgroundColor = theme.background2
+        x.style.borderColor = theme.links
+    })
+    rule = '.caxZTb {';
+    rule += `color:${theme.text};`
+    rule += `background-color:${theme.background2}`
+    rule += `border-color:${theme.links};`
+    rule += '}';
+    sheet.insertRule(rule, 16);
+
+    volumeBarBackground = [].slice.call(document.getElementsByClassName("ptC3Le"))
+    volumeBarBackground.forEach(function(x){
+        x.style.backgroundColor = theme.links
+    })
+    rule = '.ptC3Le {';
+    rule += `background-color:${theme.links}`
+    rule += '}';
+    sheet.insertRule(rule, 17);
+
+    volumeBarForeground = [].slice.call(document.getElementsByClassName("FTnqqe"))
+    volumeBarForeground.forEach(function(x){
+        x.style.backgroundColor = theme.icons
+    })
+    rule = '.FTnqqe {';
+    rule += `background-color:${theme.icons}`
+    rule += '}';
+    sheet.insertRule(rule, 18);
+
+    volumeBarCircle = [].slice.call(document.getElementsByClassName("kUwJrc"))
+    volumeBarCircle.forEach(function(x){
+        x.style.backgroundColor = theme.icons
+    })
+    rule = '.kUwJrc {';
+    rule += `background-color:${theme.icons}`
+    rule += '}';
+    sheet.insertRule(rule, 19);
+
+    subscribedCircle = [].slice.call(document.getElementsByClassName("RmrYyf"))
+    subscribedCircle.forEach(function(x){
+        x.style.backgroundColor = theme.icons
+        x.style.color = theme.links
+    })
+    rule = '.RmrYyf {';
+    rule += `background-color:${theme.icons}`
+    rule += `color:${theme.links}`
+    rule += '}';
+    sheet.insertRule(rule, 20);
+
+    websiteIcon = [].slice.call(document.getElementsByClassName("L7wSy"))
+    websiteIcon.forEach(function(x){
+        x.style.color = theme.icons
+    })
+    rule = '.DPvwYc {';
+    rule += `color:${theme.icons}`
+    rule += '}';
+    sheet.insertRule(rule, 21);
 
 }
 addDiv()

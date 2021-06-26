@@ -61,6 +61,15 @@ let base_themes = {
         "text":"#ef0195",
         "links":"#fcdf87",
         "icons":"#f68741"
+    },
+    "Original": {
+        "name":"Original",
+        "id":"Original",
+        "background":"#ffffff",
+        "background2":"#f8f9fa",
+        "text":"#3c4043",
+        "links":"rgb(60, 64, 67)",
+        "icons":"#1a73e8"
     }
 
 }
@@ -154,8 +163,10 @@ function setTheme(theme){
         element = document.createElement('style');
         element.id = "ThemeSheet";
         document.head.appendChild(element);
-        sheet = element.sheet;
+    }else{
+        element = document.getElementById("ThemeSheet");
     }
+    sheet = element.sheet;
     
 
     // set background and text color for everything
@@ -228,7 +239,7 @@ function setTheme(theme){
     rule = '.ifJp6e {';
     rule += `stroke:rgba(0,0,0,0);`;
     rule += '}';
-    sheet.insertRule(rule, 0);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 0);
 
 
     // unplayed circles fill and stroke, changed from blue stroke and white fill
@@ -241,7 +252,7 @@ function setTheme(theme){
     rule += `stroke:${theme.icons};`;
     rule += `fill:rgb(255,255,255);`;
     rule += '}';
-    sheet.insertRule(rule, 1);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 1);
     unplayedcirclesIcons = [].slice.call(document.getElementsByClassName("ugRcF"))
     unplayedcirclesIcons.forEach(function(x){
         x.style.fill = theme.icons
@@ -249,7 +260,7 @@ function setTheme(theme){
     rule = '.ugRcF {';
     rule += `fill:${theme.icons};`;
     rule += '}';
-    sheet.insertRule(rule, 2);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 2);
 
     // change colors for episodes not finished yet
     halfUnplayedPartCircles = [].slice.call(document.getElementsByClassName("zbdB4c"))
@@ -260,7 +271,7 @@ function setTheme(theme){
     rule = '.zbdB4c {';
     rule += `stroke:${theme.icons};`;
     rule += '}';
-    sheet.insertRule(rule, 3);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 3);
     halfPlayedPartCircles = [].slice.call(document.getElementsByClassName("lpZc1c"))
     halfPlayedPartCircles.forEach(function(x){
         x.style.stroke = theme.links
@@ -268,7 +279,7 @@ function setTheme(theme){
     rule = '.lpZc1c {';
     rule += `stroke:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 4);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 4);
 
     
     // currently playing
@@ -279,7 +290,7 @@ function setTheme(theme){
     rule = '.aakBI {';
     rule += `stroke:${theme.icons};`;
     rule += '}';
-    sheet.insertRule(rule, 5);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 5);
 
     playingCenterLine = [].slice.call(document.getElementsByClassName("Sygbc"))
     playingCenterLine.forEach(function(x){
@@ -288,7 +299,7 @@ function setTheme(theme){
     rule = '.Sygbc {';
     rule += `stroke:${theme.icons};`;
     rule += '}';
-    sheet.insertRule(rule, 6);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 6);
 
     playingRightLine = [].slice.call(document.getElementsByClassName("aZnmw"))
     playingRightLine.forEach(function(x){
@@ -297,7 +308,7 @@ function setTheme(theme){
     rule = '.aZnmw {';
     rule += `stroke:${theme.icons};`;
     rule += '}';
-    sheet.insertRule(rule, 7);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 7);
 
     // finished episodes
     completeCircleRight = [].slice.call(document.getElementsByClassName("ZRugV"))
@@ -307,7 +318,7 @@ function setTheme(theme){
     rule = '.ZRugV {';
     rule += `stroke:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 8);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 8);
 
     completeCircleLeft = [].slice.call(document.getElementsByClassName("hdW0bf"))
     completeCircleLeft.forEach(function(x){
@@ -316,7 +327,7 @@ function setTheme(theme){
     rule = '.hdW0bf {';
     rule += `stroke:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 9);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 9);
 
     completeCircleIcon = [].slice.call(document.getElementsByClassName("ytTdqd"))
     completeCircleIcon.forEach(function(x){
@@ -325,7 +336,7 @@ function setTheme(theme){
     rule = '.ytTdqd {';
     rule += `fill:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 10);    
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 10);    
 
     // bar icons
     barIcons = [].slice.call(document.getElementsByClassName("DPvwYc"))
@@ -335,7 +346,7 @@ function setTheme(theme){
     rule = '.DPvwYc {';
     rule += `color:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 11);    
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 11);    
 
     barSpeeedBackground = [].slice.call(document.getElementsByClassName("Ttr5be"))
     barSpeeedBackground.forEach(function(x){
@@ -346,7 +357,7 @@ function setTheme(theme){
     rule += `background-color:${theme.background};`;
     rule += `border-color:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 12);    
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 12);    
 
     barSpeeedBackground = [].slice.call(document.getElementsByClassName("Ttr5be"))
     barSpeeedBackground.forEach(function(x){
@@ -357,7 +368,7 @@ function setTheme(theme){
     rule += `background-color:${theme.background};`;
     rule += `border-color:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 12); 
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 12); 
 
     speedChooserDiv = [].slice.call(document.getElementsByClassName("JPdR6b"))
     speedChooserDiv.forEach(function(x){
@@ -369,7 +380,7 @@ function setTheme(theme){
     rule += `border-color:${theme.links};`;
     rule += `color:${theme.text};`
     rule += '}';
-    sheet.insertRule(rule, 13); 
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 13); 
 
     speedChooserDone = [].slice.call(document.getElementsByClassName("TkgSBc"))
     speedChooserDone.forEach(function(x){
@@ -378,7 +389,7 @@ function setTheme(theme){
     rule = '.TkgSBc {';
     rule += `color:${theme.icons};`
     rule += '}';
-    sheet.insertRule(rule, 14); 
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 14); 
 
     SelectedSpeedSquare = [].slice.call(document.getElementsByClassName("cL0K1b"))
     speedChooserDone.forEach(function(x){
@@ -389,7 +400,7 @@ function setTheme(theme){
     rule += `color:${theme.icons};`
     rule += `background-color:${theme.background}`
     rule += '}';
-    sheet.insertRule(rule, 15); 
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 15); 
     
     SpeedSquares = [].slice.call(document.getElementsByClassName("caxZTb"))
     SpeedSquares.forEach(function(x){
@@ -402,7 +413,7 @@ function setTheme(theme){
     rule += `background-color:${theme.background2}`
     rule += `border-color:${theme.links};`
     rule += '}';
-    sheet.insertRule(rule, 16);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 16);
 
     volumeBarBackground = [].slice.call(document.getElementsByClassName("ptC3Le"))
     volumeBarBackground.forEach(function(x){
@@ -411,7 +422,7 @@ function setTheme(theme){
     rule = '.ptC3Le {';
     rule += `background-color:${theme.links}`
     rule += '}';
-    sheet.insertRule(rule, 17);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 17);
 
     volumeBarForeground = [].slice.call(document.getElementsByClassName("FTnqqe"))
     volumeBarForeground.forEach(function(x){
@@ -420,7 +431,7 @@ function setTheme(theme){
     rule = '.FTnqqe {';
     rule += `background-color:${theme.icons}`
     rule += '}';
-    sheet.insertRule(rule, 18);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 18);
 
     volumeBarCircle = [].slice.call(document.getElementsByClassName("kUwJrc"))
     volumeBarCircle.forEach(function(x){
@@ -429,7 +440,7 @@ function setTheme(theme){
     rule = '.kUwJrc {';
     rule += `background-color:${theme.icons}`
     rule += '}';
-    sheet.insertRule(rule, 19);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 19);
 
     subscribedCircle = [].slice.call(document.getElementsByClassName("RmrYyf"))
     subscribedCircle.forEach(function(x){
@@ -440,17 +451,27 @@ function setTheme(theme){
     rule += `background-color:${theme.icons}`
     rule += `color:${theme.links}`
     rule += '}';
-    sheet.insertRule(rule, 20);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 20);
 
     websiteIcon = [].slice.call(document.getElementsByClassName("L7wSy"))
     websiteIcon.forEach(function(x){
         x.style.color = theme.icons
     })
-    rule = '.DPvwYc {';
+    rule = '.L7wSy {';
     rule += `color:${theme.icons}`
     rule += '}';
-    sheet.insertRule(rule, 21);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 21);
 
+}
+function getTextNodesIterator(el) { // Returns an iterable TreeWalker
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    walker[Symbol.iterator] = () => ({
+        next() {
+            const value = walker.nextNode();
+            return {value, done: !value};
+        }
+    });
+    return walker;
 }
 function revertToBase(){
     theme = originalTheme
@@ -539,7 +560,7 @@ function revertToBase(){
     rule = '.ifJp6e {';
     rule += `stroke:rgba(0,0,0,0);`;
     rule += '}';
-    sheet.insertRule(rule, 0);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 0);
 
 
     // unplayed circles fill and stroke, changed from blue stroke and white fill
@@ -552,7 +573,7 @@ function revertToBase(){
     rule += `stroke:${theme.icons};`;
     rule += `fill:rgb(255,255,255);`;
     rule += '}';
-    sheet.insertRule(rule, 1);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 1);
     unplayedcirclesIcons = [].slice.call(document.getElementsByClassName("ugRcF"))
     unplayedcirclesIcons.forEach(function(x){
         x.style.fill = theme.icons
@@ -560,7 +581,7 @@ function revertToBase(){
     rule = '.ugRcF {';
     rule += `fill:${theme.icons};`;
     rule += '}';
-    sheet.insertRule(rule, 2);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 2);
 
     // change colors for episodes not finished yet
     halfUnplayedPartCircles = [].slice.call(document.getElementsByClassName("zbdB4c"))
@@ -571,7 +592,7 @@ function revertToBase(){
     rule = '.zbdB4c {';
     rule += `stroke:${theme.icons};`;
     rule += '}';
-    sheet.insertRule(rule, 3);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 3);
     halfPlayedPartCircles = [].slice.call(document.getElementsByClassName("lpZc1c"))
     halfPlayedPartCircles.forEach(function(x){
         x.style.stroke = theme.links
@@ -579,7 +600,7 @@ function revertToBase(){
     rule = '.lpZc1c {';
     rule += `stroke:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 4);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 4);
 
     
     // currently playing
@@ -590,7 +611,7 @@ function revertToBase(){
     rule = '.aakBI {';
     rule += `stroke:${theme.icons};`;
     rule += '}';
-    sheet.insertRule(rule, 5);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 5);
 
     playingCenterLine = [].slice.call(document.getElementsByClassName("Sygbc"))
     playingCenterLine.forEach(function(x){
@@ -599,7 +620,7 @@ function revertToBase(){
     rule = '.Sygbc {';
     rule += `stroke:${theme.icons};`;
     rule += '}';
-    sheet.insertRule(rule, 6);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 6);
 
     playingRightLine = [].slice.call(document.getElementsByClassName("aZnmw"))
     playingRightLine.forEach(function(x){
@@ -608,7 +629,7 @@ function revertToBase(){
     rule = '.aZnmw {';
     rule += `stroke:${theme.icons};`;
     rule += '}';
-    sheet.insertRule(rule, 7);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 7);
 
     // finished episodes
     completeCircleRight = [].slice.call(document.getElementsByClassName("ZRugV"))
@@ -618,7 +639,7 @@ function revertToBase(){
     rule = '.ZRugV {';
     rule += `stroke:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 8);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 8);
 
     completeCircleLeft = [].slice.call(document.getElementsByClassName("hdW0bf"))
     completeCircleLeft.forEach(function(x){
@@ -627,7 +648,7 @@ function revertToBase(){
     rule = '.hdW0bf {';
     rule += `stroke:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 9);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 9);
 
     completeCircleIcon = [].slice.call(document.getElementsByClassName("ytTdqd"))
     completeCircleIcon.forEach(function(x){
@@ -636,7 +657,7 @@ function revertToBase(){
     rule = '.ytTdqd {';
     rule += `fill:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 10);    
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 10);    
 
     // bar icons
     barIcons = [].slice.call(document.getElementsByClassName("DPvwYc"))
@@ -646,7 +667,7 @@ function revertToBase(){
     rule = '.DPvwYc {';
     rule += `color:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 11);    
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 11);    
 
     barSpeeedBackground = [].slice.call(document.getElementsByClassName("Ttr5be"))
     barSpeeedBackground.forEach(function(x){
@@ -657,7 +678,7 @@ function revertToBase(){
     rule += `background-color:${theme.background};`;
     rule += `border-color:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 12);    
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 12);    
 
     barSpeeedBackground = [].slice.call(document.getElementsByClassName("Ttr5be"))
     barSpeeedBackground.forEach(function(x){
@@ -668,7 +689,7 @@ function revertToBase(){
     rule += `background-color:${theme.background};`;
     rule += `border-color:${theme.links};`;
     rule += '}';
-    sheet.insertRule(rule, 12); 
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 12); 
 
     speedChooserDiv = [].slice.call(document.getElementsByClassName("JPdR6b"))
     speedChooserDiv.forEach(function(x){
@@ -680,7 +701,7 @@ function revertToBase(){
     rule += `border-color:${theme.links};`;
     rule += `color:${theme.text};`
     rule += '}';
-    sheet.insertRule(rule, 13); 
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 13); 
 
     speedChooserDone = [].slice.call(document.getElementsByClassName("TkgSBc"))
     speedChooserDone.forEach(function(x){
@@ -689,7 +710,7 @@ function revertToBase(){
     rule = '.TkgSBc {';
     rule += `color:${theme.icons};`
     rule += '}';
-    sheet.insertRule(rule, 14); 
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 14); 
 
     SelectedSpeedSquare = [].slice.call(document.getElementsByClassName("cL0K1b"))
     speedChooserDone.forEach(function(x){
@@ -700,7 +721,7 @@ function revertToBase(){
     rule += `color:${theme.icons};`
     rule += `background-color:${theme.background}`
     rule += '}';
-    sheet.insertRule(rule, 15); 
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 15); 
     
     SpeedSquares = [].slice.call(document.getElementsByClassName("caxZTb"))
     SpeedSquares.forEach(function(x){
@@ -713,7 +734,7 @@ function revertToBase(){
     rule += `background-color:${theme.background2}`
     rule += `border-color:${theme.links};`
     rule += '}';
-    sheet.insertRule(rule, 16);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 16);
 
     volumeBarBackground = [].slice.call(document.getElementsByClassName("ptC3Le"))
     volumeBarBackground.forEach(function(x){
@@ -722,7 +743,7 @@ function revertToBase(){
     rule = '.ptC3Le {';
     rule += `background-color:${theme.links}`
     rule += '}';
-    sheet.insertRule(rule, 17);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 17);
 
     volumeBarForeground = [].slice.call(document.getElementsByClassName("FTnqqe"))
     volumeBarForeground.forEach(function(x){
@@ -731,7 +752,7 @@ function revertToBase(){
     rule = '.FTnqqe {';
     rule += `background-color:${theme.icons}`
     rule += '}';
-    sheet.insertRule(rule, 18);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 18);
 
     volumeBarCircle = [].slice.call(document.getElementsByClassName("kUwJrc"))
     volumeBarCircle.forEach(function(x){
@@ -740,7 +761,7 @@ function revertToBase(){
     rule = '.kUwJrc {';
     rule += `background-color:${theme.icons}`
     rule += '}';
-    sheet.insertRule(rule, 19);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 19);
 
     subscribedCircle = [].slice.call(document.getElementsByClassName("RmrYyf"))
     subscribedCircle.forEach(function(x){
@@ -751,27 +772,30 @@ function revertToBase(){
     rule += `background-color:${theme.icons}`
     rule += `color:${theme.links}`
     rule += '}';
-    sheet.insertRule(rule, 20);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 20);
 
     websiteIcon = [].slice.call(document.getElementsByClassName("L7wSy"))
     websiteIcon.forEach(function(x){
         x.style.color = theme.icons
     })
-    rule = '.DPvwYc {';
+    rule = '.L7wSy {';
     rule += `color:${theme.icons}`
     rule += '}';
-    sheet.insertRule(rule, 21);
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 21);
 
 }
 addDiv()
-if(localStorage.getItem("currentTheme")){
-    currentTheme = localStorage.getItem("currentTheme")
-    div = document.getElementById(currentTheme)
-    div.style.boxShadow = "0 0 0 2pt white"
-    setTheme(base_themes[currentTheme])
-}else{
-    revertToBase()
+document.onload = function(){
+    if(localStorage.getItem("currentTheme")){
+        currentTheme = localStorage.getItem("currentTheme")
+        div = document.getElementById(currentTheme)
+        div.style.boxShadow = "0 0 0 2pt white"
+        setTheme(base_themes[currentTheme])
+    }else{
+        revertToBase()
+    }
 }
+
 window.ontransitionend = function(){
     if(localStorage.getItem("currentTheme")){
         currentTheme = localStorage.getItem("currentTheme")

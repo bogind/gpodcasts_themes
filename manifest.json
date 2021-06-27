@@ -4,7 +4,7 @@
     "name": "Google Podcasts Themes",
     "version": "1.0",
   
-    "description": "Fixes Heb To Eng typing Flips due to typing in different keyboard layouts",
+    "description": "Allows the user to apply themes to Google Podcasts",
 
     "icons": {
         "48": "icons/border-48.png"

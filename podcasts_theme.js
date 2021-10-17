@@ -176,7 +176,10 @@ function setTheme(theme){
     document.getElementsByTagName("header")[0].style.backgroundColor = theme.background2
     
     // get footer
-    document.getElementsByClassName("dq2Yed")[0].style.backgroundColor = theme.background2
+    if(document.getElementsByClassName("dq2Yed").length > 0){
+        document.getElementsByClassName("dq2Yed")[0].style.backgroundColor = theme.background2
+    }
+    
     // get footer without google classes
     // footerIamge = document.getElementsByTagName("img")[document.getElementsByTagName("img").length-2]
     // footer = footerIamge.parentElement.parentElement.parentElement.parentElement
@@ -461,6 +464,113 @@ function setTheme(theme){
     rule += `color:${theme.icons}`
     rule += '}';
     document.getElementById("ThemeSheet").sheet.insertRule(rule, 21);
+
+    // ##################################
+    // Unstarted classes
+    // ##################################
+
+    unstartedMainPodcastName = [].slice.call(document.getElementsByClassName("FyxyKd"))
+    unstartedMainPodcastName.forEach(function(x){
+        x.style.color = theme.text
+    })
+    rule = '.FyxyKd {';
+    rule += `color:${theme.text}`
+    rule += '}';
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 22);
+    
+    
+    unstartedPodcastName = [].slice.call(document.getElementsByClassName("uwjJFd"))
+    unstartedPodcastName.forEach(function(x){
+        x.style.color = theme.text
+    })
+    rule = '.uwjJFd {';
+    rule += `color:${theme.text}`
+    rule += '}';
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 23);
+
+
+    unstartedPodcastDescription = [].slice.call(document.getElementsByClassName("yJLqZc"))
+    unstartedPodcastDescription.forEach(function(x){
+        x.style.color = theme.text
+    })
+    rule = '.yJLqZc {';
+    rule += `color:${theme.text}`
+    rule += '}';
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 24);
+
+    subscribeUnstartedPodcast = [].slice.call(document.getElementsByClassName("bPsqDc"))
+    subscribeUnstartedPodcast.forEach(function(x){
+        x.style.color = theme.icons
+    })
+    rule = '.bPsqDc {';
+    rule += `color:${theme.icons}`
+    rule += '}';
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 25);
+
+    unstartedPodcastSubheader = [].slice.call(document.getElementsByClassName("ZhPnbc"))
+    unstartedPodcastSubheader.forEach(function(x){
+        x.style.color = theme.links
+    })
+    rule = '.ZhPnbc {';
+    rule += `color:${theme.links}`
+    rule += '}';
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 26);
+
+    unstartedLinks = [].slice.call(document.getElementsByClassName("fIqyif"))
+    unstartedLinks.forEach(function(x){
+        x.style.color = theme.links
+    })
+    rule = '.fIqyif {';
+    rule += `color:${theme.links}`
+    rule += '}';
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 27);
+
+    unstartedLinks = [].slice.call(document.getElementsByClassName("fIqyif"))
+    unstartedLinks.forEach(function(x){
+        x.style.color = theme.icons
+    })
+    rule = '.fIqyif:hover {';
+    rule += `color:${theme.icons}`
+    rule += '}';
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 28);
+
+    unstartedPodcastsTitle = [].slice.call(document.getElementsByClassName("ldf2Je"))
+    unstartedPodcastsTitle.forEach(function(x){
+        x.style.color = theme.text
+    })
+    rule = '.ldf2Je {';
+    rule += `color:${theme.text}`
+    rule += '}';
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 29);
+
+    unstartedSubscribedNames = [].slice.call(document.getElementsByClassName("eWeGpe"))
+    unstartedSubscribedNames.forEach(function(x){
+        x.style.color = theme.links
+    })
+    rule = '.eWeGpe {';
+    rule += `color:${theme.links}`
+    rule += '}';
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 30);
+
+    unstartedSubscribedAuthorNames = [].slice.call(document.getElementsByClassName("yFWEIe"))
+    unstartedSubscribedAuthorNames.forEach(function(x){
+        x.style.color = theme.text
+    })
+    rule = '.yFWEIe {';
+    rule += `color:${theme.text}`
+    rule += '}';
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 31);
+    
+    unstartedTimer = [].slice.call(document.getElementsByClassName("gUJ0Wc"))
+    unstartedTimer.forEach(function(x){
+        x.style.color = theme.text
+    })
+    rule = '.gUJ0Wc {';
+    rule += `color:${theme.text}`
+    rule += '}';
+    document.getElementById("ThemeSheet").sheet.insertRule(rule, 31);
+
+    
 
 }
 function getTextNodesIterator(el) { // Returns an iterable TreeWalker
@@ -797,6 +907,17 @@ document.onload = function(){
 }
 
 window.ontransitionend = function(){
+    if(localStorage.getItem("currentTheme")){
+        currentTheme = localStorage.getItem("currentTheme")
+        div = document.getElementById(currentTheme)
+        div.style.boxShadow = "0 0 0 2pt white"
+        setTheme(base_themes[currentTheme])
+    }else{
+        revertToBase()
+    }
+}
+
+window.onload = function(){
     if(localStorage.getItem("currentTheme")){
         currentTheme = localStorage.getItem("currentTheme")
         div = document.getElementById(currentTheme)

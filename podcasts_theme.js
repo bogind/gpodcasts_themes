@@ -62,6 +62,24 @@ let base_themes = {
         "links":"#fcdf87",
         "icons":"#f68741"
     },
+    "blackNwhite1":{
+        "name":"Black & White 1",
+        "id":"blackNwhite1",
+        "background":"#30302e",
+        "background2":"#d6d6d5",
+        "text":"#ffffff",
+        "links":"#838382",
+        "icons":"#595958"
+    },
+    "blackNwhite2":{
+        "name":"Black & White 2",
+        "id":"blackNwhite2",
+        "background":"#eeeeee",
+        "background2":"#d4d1d1",
+        "text":"#000000",
+        "links":"#858383",
+        "icons":"#3e3e3e"
+    },
     "Original": {
         "name":"Original",
         "id":"Original",
